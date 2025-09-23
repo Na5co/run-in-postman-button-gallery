@@ -314,7 +314,7 @@ export function generatePostmanButtonHtml({
             class="custom-postman-button ${animationClass}"
             style="${getButtonStyles()}"
         >
-            ${icon ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-${icon.name}">${icon.svg}</svg>` : ''}
+            ${icon ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-${icon.name}">${icon.svg}</svg>` : ''}
             ${displayText}
         </a>
     </div>
@@ -618,7 +618,7 @@ ${animationCSS}
     class="custom-postman-button-${style.id} ${animationClass}"
     style="display:inline-flex; align-items:center; text-decoration:none;"
 >
-    ${icon ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-${icon.name}" style="margin-right: 8px;">${icon.svg}</svg>` : ''}
+    ${icon ? `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-${icon.name}" style="margin-right: 8px;">${icon.svg}</svg>` : ''}
     <span style="${getButtonStyles()}">${displayText}</span>
 </a>`;
 }
