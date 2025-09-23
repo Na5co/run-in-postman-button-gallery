@@ -1,36 +1,172 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Postman Button Studio
 
-## Getting Started
+A professional-grade, stunning Run in Postman button designer with unique styles, advanced animations, and custom gradients.
 
-First, run the development server:
+## ✨ Features
 
+- **10 Unique Button Designs**: Truly different styles, not just color variations
+- **Professional Dark Interface**: Modern, eye-catching design tool
+- **Advanced Gradient Editor**: Real-time color customization with live preview
+- **Multiple Export Formats**: 
+  - **Inline HTML**: Clean code for embedding directly
+  - **Complete HTML**: Full page ready for deployment
+- **Full Postman Integration**: Maintains official Run in Postman functionality
+- **One-Click Operations**: Copy to clipboard and download instantly
+- **Responsive Design**: Works beautifully on all devices
+
+## 🎨 Button Style Gallery
+
+1. **Neon Glow** - Futuristic pill shape with glowing effects
+2. **Angular Tech** - Sharp, modern design with angular edges
+3. **Soft Organic** - Unique asymmetric curves and gentle shadows
+4. **Ghost Outline** - Minimalist outlined design with gradient borders
+5. **3D Elevated** - Three-dimensional appearance with depth
+6. **Glass Effect** - Trendy glassmorphism with blur and transparency
+7. **Retro Vintage** - 80s-inspired bold typography and hard shadows
+8. **Neumorphic** - Soft extruded appearance that seems to float
+9. **Icon Focus** - Large icon emphasis with compact text
+10. **Ultra Minimal** - Clean, flat design with subtle interactions
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd postman-button-library
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Start the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-## Learn More
+## 📝 How to Use
 
-To learn more about Next.js, take a look at the following resources:
+1. **Enter Postman Details**:
+   - Collection ID (required)
+   - Workspace ID (required)
+   - Custom button text (optional)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Choose a Style**:
+   - Select from 8 pre-designed button styles
+   - Each style has unique gradients, shadows, and typography
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Customize (Optional)**:
+   - Click "Customize" to access color picker
+   - Choose custom gradient colors using predefined colors or color picker
+   - See live preview of your changes
 
-## Deploy on Vercel
+4. **Generate Code**:
+   - Switch between "Inline HTML" and "Full HTML" tabs
+   - Copy code to clipboard with one click
+   - Download complete HTML file for full page option
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+5. **Integrate**:
+   - Paste the generated code into your website
+   - The button will maintain full Postman functionality
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔧 Technology Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+
+## 📁 Project Structure
+
+```
+src/
+├── app/                 # Next.js app router
+│   ├── layout.tsx      # Root layout
+│   ├── page.tsx        # Main page
+│   └── globals.css     # Global styles
+├── components/          # React components
+│   ├── ButtonPreview.tsx
+│   └── ColorPicker.tsx
+├── lib/                # Utility functions
+│   ├── button-styles.ts
+│   └── html-generator.ts
+└── types/              # TypeScript types
+    └── button.ts
+```
+
+## 🎯 Features in Detail
+
+### Button Styles
+Each button style includes:
+- Unique gradient combinations
+- Custom border radius
+- Tailored padding and typography
+- Distinctive shadow effects
+- Hover animations
+
+### HTML Generation
+- **Inline HTML**: Minimal code for embedding
+- **Full HTML**: Complete page with necessary scripts
+- **Postman Integration**: Includes official Postman Run Button script
+- **Cross-browser Support**: Works across all modern browsers
+
+### Customization Options
+- **Color Picker**: Choose any color for gradients
+- **Predefined Colors**: Quick selection from 12 popular colors
+- **Real-time Preview**: See changes instantly
+- **Custom Text**: Personalize button text
+
+## 🚀 Deployment
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+### Deploy to Vercel
+
+```bash
+npm install -g vercel
+vercel
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🔗 Related
+
+- [Postman API Documentation](https://documenter.getpostman.com/)
+- [Run in Postman Button Documentation](https://learning.postman.com/docs/publishing-your-api/run-in-postman/introduction-run-button/)
+
+## 🆘 Support
+
+If you have any questions or need help, please:
+1. Check the documentation
+2. Search existing issues
+3. Create a new issue with detailed information
+
+---
+
+Made with ❤️ for the Postman community
