@@ -1,4 +1,165 @@
 import { ButtonStyle } from '@/types/button';
+import { shadeColor } from '@/lib/colors';
+
+export const getButtonDynamicStyles = (
+  style: ButtonStyle,
+  gradientFrom: string,
+  gradientTo: string
+): React.CSSProperties => {
+  const baseStyles: React.CSSProperties = {
+    color: style.textColor,
+    borderRadius: style.borderRadius,
+    padding: style.padding,
+    fontSize: style.fontSize,
+    fontWeight: style.fontWeight,
+    boxShadow: style.shadow,
+    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',
+    transition: 'all 0.3s ease',
+    position: 'relative',
+    overflow: 'hidden',
+    border: 'none',
+  };
+
+  const styleMappings: { [key: string]: React.CSSProperties } = {
+    'outlined-minimal': {
+      background: 'transparent',
+      border: `2px solid ${gradientFrom}`,
+      boxShadow: 'none',
+      color: gradientFrom,
+    },
+    'glassmorphism': {
+      background: `linear-gradient(135deg, ${gradientFrom}40, ${gradientTo}40)`,
+      backdropFilter: 'blur(20px)',
+      border: '1px solid rgba(255,255,255,0.1)'
+    },
+    'retro-vintage': {
+      background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+      textTransform: 'uppercase',
+      letterSpacing: '1px'
+    },
+    'elevated-3d': {
+      background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+      boxShadow: `0 8px 0 ${shadeColor(gradientTo, -20)}, 0 12px 25px ${gradientTo}66`,
+    },
+    'pixel-art': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `4px 4px 0px ${shadeColor(gradientTo, -40)}`,
+        border: `4px solid ${shadeColor(gradientTo, -50)}`
+    },
+    'subtle-shimmer': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `0 10px 20px ${gradientTo}33`,
+    },
+    'skewed-dynamic': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `0 10px 20px ${gradientTo}33`,
+        transform: 'skew(-10deg)',
+    },
+    'minimalist-icon': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `0 4px 10px ${gradientTo}4d`,
+        borderRadius: '50%',
+        padding: '16px',
+    },
+    'bold-block': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `0 0 0 4px ${shadeColor(gradientFrom, -50)}`,
+        color: shadeColor(gradientFrom, -50),
+        border: `2px solid ${shadeColor(gradientFrom, -50)}`
+    },
+    'comic-book': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        border: `3px solid ${shadeColor(gradientTo, -50)}`,
+        boxShadow: `6px 6px 0px ${shadeColor(gradientTo, -50)}`,
+        color: shadeColor(gradientTo, -50),
+        fontWeight: '900',
+    },
+    'caution-tape': {
+        backgroundImage: `repeating-linear-gradient(45deg, ${gradientFrom}, ${gradientFrom} 30px, ${gradientTo} 30px, ${gradientTo} 60px)`,
+        color: shadeColor(gradientTo, -60),
+        fontWeight: '800',
+        border: `4px solid ${shadeColor(gradientTo, -60)}`,
+    },
+    'cyberpunk-glitch': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `0 0 15px ${gradientTo}`,
+        textShadow: `2px 2px 0px ${gradientFrom}`,
+    },
+    'hand-drawn': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        border: `3px solid ${shadeColor(gradientTo, -20)}`,
+        borderRadius: '16px 4px 16px 4px / 4px 16px 4px 16px',
+        color: shadeColor(gradientTo, -20),
+    },
+    'ugly-90s': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        border: `4px solid ${style.textColor}`,
+        boxShadow: `4px 4px 0px ${style.textColor}`,
+        color: style.textColor,
+        fontWeight: '900',
+    },
+    'baroque-luxury': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+        border: `2px solid ${shadeColor(gradientFrom, -20)}`,
+        boxShadow: `0 0 15px ${gradientFrom}`,
+        fontFamily: 'serif',
+    },
+    'wood-grain': {
+        backgroundImage: `linear-gradient(to right, ${gradientFrom}, ${gradientTo}), linear-gradient(to right, rgba(255,255,255,0.2) 50%, transparent 50%), linear-gradient(to bottom, rgba(255,255,255,0.2) 50%, transparent 50%)`,
+        backgroundBlendMode: 'screen',
+        backgroundSize: '100%, 8px 8px, 8px 8px',
+        border: `2px solid ${shadeColor(gradientFrom, -20)}`,
+    },
+    'liquid-metal': {
+        background: `radial-gradient(circle at 100% 100%, ${gradientFrom} 0, ${gradientTo} 100%)`,
+        boxShadow: `0 0 15px ${gradientTo}`,
+        color: shadeColor(gradientTo, -40),
+    },
+    'blueprint': {
+        background: gradientFrom,
+        border: `2px dashed ${gradientTo}`,
+        color: gradientTo,
+    },
+    'rusted-metal': {
+        backgroundImage: `linear-gradient(${gradientFrom}, ${gradientTo}), repeating-linear-gradient(45deg, rgba(255,255,255,0.05), rgba(255,255,255,0.05) 2px, transparent 2px, transparent 4px)`,
+        boxShadow: `inset 0 0 10px ${shadeColor(gradientFrom, -30)}`,
+    },
+    'satin-finish': {
+        background: `linear-gradient(180deg, ${gradientFrom}, ${gradientTo})`,
+        boxShadow: `inset 0 1px 0 ${shadeColor(gradientFrom, 20)}, 0 10px 20px rgba(0,0,0,0.1)`,
+        color: style.textColor,
+    },
+    'letterpress': {
+        background: gradientFrom,
+        boxShadow: `inset 0 2px 4px ${shadeColor(gradientFrom, -10)}, 0 1px 1px ${shadeColor(gradientFrom, 10)}`,
+        textShadow: `0 1px 1px ${shadeColor(gradientFrom, 10)}`,
+        color: style.textColor,
+    },
+    'dual-tone': {
+        background: `linear-gradient(90deg, ${gradientFrom} 50%, ${gradientTo} 50%)`,
+        color: style.textColor,
+    },
+    'aurora': {
+        backgroundImage: `radial-gradient(ellipse at bottom, ${gradientFrom}, transparent), radial-gradient(ellipse at top, ${gradientTo}, transparent)`,
+        boxShadow: `0 0 20px ${gradientTo}`,
+        color: style.textColor,
+    },
+    'minimalist-stroke': {
+        background: 'transparent',
+        border: `2px solid ${gradientFrom}`,
+        color: gradientFrom,
+    },
+    'neumorphism': {
+        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+    }
+  };
+
+  const specificStyles = styleMappings[style.id] || {
+    background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
+  };
+
+  return { ...baseStyles, ...specificStyles };
+};
 
 export const defaultButtonStyles: ButtonStyle[] = [
   {

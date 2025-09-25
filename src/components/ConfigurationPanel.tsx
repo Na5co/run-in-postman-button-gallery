@@ -51,7 +51,7 @@ export const ConfigurationPanel = memo(function ConfigurationPanel({
 }: ConfigurationPanelProps) {
   return (
     <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-4 sticky top-8 shadow-xl">
-      <Accordion type="single" collapsible defaultValue='item-1' className="w-full">
+      <Accordion type="single" defaultValue='item-1' className="w-full">
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className="flex items-center space-x-3">

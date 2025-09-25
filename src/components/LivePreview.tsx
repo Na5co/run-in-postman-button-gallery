@@ -41,6 +41,7 @@ export const LivePreview = memo(function LivePreview({
           animations={animations}
           selectedIcon={selectedIcon}
           buttonText={buttonText}
+          isLivePreview
         />
       </div>
     </div>

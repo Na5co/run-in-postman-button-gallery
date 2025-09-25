@@ -24,7 +24,8 @@ export interface AnimationOption {
   description: string;
   cssClass: string;
   keyframes?: string;
-  animation: string;
+  baseStyles?: string;
+  hoverStyles?: string;
 }
 
 export interface ButtonAnimation {

@@ -10,6 +10,7 @@ import { ExportCode } from '@/components/ExportCode';
 import { defaultButtonStyles } from '@/lib/button-styles';
 import { generatePostmanButtonHtml, generateInlineButtonHtml } from '@/lib/html-generator';
 import { ButtonStyle, CustomGradient, ButtonAnimation } from '@/types/button';
+import { AnimatedDiv } from '@/components/AnimatedDiv';
 
 const iconComponents = {
   Rocket, Heart, Star, Download, Upload, Lock, Unlock,
@@ -55,12 +56,22 @@ export default function Home() {
     if (selectedIcon) {
       const IconComponent = iconComponents[selectedIcon as keyof typeof iconComponents];
       if (IconComponent) {
-        const iconElement = React.createElement(IconComponent);
-        const renderedString = renderToStaticMarkup(iconElement);
-        const svgContentsMatch = renderedString.match(/<svg[^>]*>([\s\S]*)<\/svg>/);
-        if (svgContentsMatch && svgContentsMatch[1]) {
-          iconSvg = svgContentsMatch[1];
+        const getIconSize = () => {
+          if (selectedStyle.id === 'icon-heavy') return '32';
+          if (selectedStyle.id === 'retro-vintage') return '20';
+          return '16';
+        };
+        const iconSize = getIconSize();
+
+        const iconElement = React.createElement(IconComponent, { size: iconSize });
+        let svgString = renderToStaticMarkup(iconElement);
+
+        // Add margin if the button has text
+        const hasText = selectedStyle.id !== 'minimalist-icon';
+        if (hasText) {
+          svgString = svgString.replace('<svg', '<svg style="margin-right: 8px;"');
         }
+        iconSvg = svgString;
       }
     }
 
@@ -89,26 +100,22 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="relative py-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center px-4 py-2 bg-violet-900 border border-violet-500 rounded-full mb-8">
-            <Star className="w-4 h-4 mr-2 text-violet-400" />
-            <span className="text-sm font-medium text-violet-300">Professional Button Designer</span>
-          </div>
-          
-          <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent leading-tight [text-shadow:0_4px_20px_rgba(138,43,226,0.3)]">
-            Postman Button
-            <br />
-            <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 text-center overflow-hidden">
+        <AnimatedDiv>
+          <h1 className="text-5xl md:text-6xl font-black mb-6 text-white leading-tight">
+            Postman Button{' '}
+            <span className="bg-gradient-to-r from-violet-400 to-purple-500 bg-clip-text text-transparent">
               Studio
             </span>
           </h1>
           
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
             Craft stunning, professional-grade Run in Postman buttons with unique designs, 
             advanced animations, and custom gradient colors. Elevate your API documentation.
           </p>
+        </AnimatedDiv>
 
+        <AnimatedDiv delay={0.2}>
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <Layers className="w-4 h-4" />
@@ -127,13 +134,13 @@ export default function Home() {
               <span>Export Ready</span>
             </div>
           </div>
-        </div>
+        </AnimatedDiv>
       </section>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
           {/* Configuration Panel */}
-          <div className="xl:col-span-1 order-2 xl:order-1">
+          <AnimatedDiv className="xl:col-span-1 order-2 xl:order-1" delay={0.4}>
             <ConfigurationPanel
               collectionId={collectionId}
               setCollectionId={setCollectionId}
@@ -151,26 +158,34 @@ export default function Home() {
               setAnimations={setAnimations}
               isValidConfig={isValidConfig}
             />
-          </div>
+          </AnimatedDiv>
 
           {/* Main Content */}
           <div className="xl:col-span-3 order-1 xl:order-2 space-y-8">
-            <ButtonGallery
-              selectedStyle={selectedStyle}
-              customGradient={customGradient}
-              onStyleSelect={handleStyleSelect}
-            />
+            <AnimatedDiv>
+              <ButtonGallery
+                selectedStyle={selectedStyle}
+                customGradient={customGradient}
+                onStyleSelect={handleStyleSelect}
+              />
+            </AnimatedDiv>
             
-            <LivePreview
-              selectedStyle={livePreviewStyle}
-              customGradient={customGradient}
-              animations={animations}
-              textColor={textColor}
-              selectedIcon={selectedIcon}
-              buttonText={buttonText}
-            />
+            <AnimatedDiv delay={0.2}>
+              <LivePreview
+                selectedStyle={livePreviewStyle}
+                customGradient={customGradient}
+                animations={animations}
+                textColor={textColor}
+                selectedIcon={selectedIcon}
+                buttonText={buttonText}
+              />
+            </AnimatedDiv>
             
-            {isValidConfig && <ExportCode generatedHtml={generatedHtml} />}
+            {isValidConfig && (
+              <AnimatedDiv delay={0.4}>
+                <ExportCode generatedHtml={generatedHtml} />
+              </AnimatedDiv>
+            )}
           </div>
         </div>
       </div>

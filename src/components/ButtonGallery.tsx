@@ -28,12 +28,15 @@ export const ButtonGallery = memo(function ButtonGallery({
   );
 
   const handleNextPage = () => {
-    setCurrentPage((prev) => (prev + 1) % totalPages);
+    setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
   };
 
   const handlePrevPage = () => {
-    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+    setCurrentPage((prev) => Math.max(prev - 1, 0));
   };
+
+  const isFirstPage = currentPage === 0;
+  const isLastPage = currentPage === totalPages - 1;
 
   return (
     <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl">
@@ -48,13 +51,21 @@ export const ButtonGallery = memo(function ButtonGallery({
           </span>
         </div>
         <div className="flex items-center space-x-2">
-          <button onClick={handlePrevPage} className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors">
+          <button
+            onClick={handlePrevPage}
+            disabled={isFirstPage}
+            className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <span className="text-sm text-gray-400">
+          <span className="text-sm text-gray-400 w-20 text-center">
             Page {currentPage + 1} of {totalPages}
           </span>
-          <button onClick={handleNextPage} className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors">
+          <button
+            onClick={handleNextPage}
+            disabled={isLastPage}
+            className="p-2 rounded-md bg-gray-800 hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>

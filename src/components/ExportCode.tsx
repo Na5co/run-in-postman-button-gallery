@@ -15,14 +15,15 @@ type Tab = 'full' | 'inline';
 
 export const ExportCode = memo(function ExportCode({ generatedHtml }: ExportCodeProps) {
   const [activeTab, setActiveTab] = useState<Tab>('inline');
-  const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
+  const [isCopied, setIsCopied] = useState(false);
 
-  const handleCopy = async (text: string, key: string) => {
+  const handleCopy = async () => {
+    if (!generatedHtml) return;
     try {
-      await copyToClipboard(text);
-      setCopiedStates({ ...copiedStates, [key]: true });
+      await copyToClipboard(generatedHtml[activeTab]);
+      setIsCopied(true);
       setTimeout(() => {
-        setCopiedStates({ ...copiedStates, [key]: false });
+        setIsCopied(false);
       }, 2000);
     } catch (err) {
       console.error('Failed to copy text: ', err);
@@ -31,11 +32,11 @@ export const ExportCode = memo(function ExportCode({ generatedHtml }: ExportCode
   
   const handleDownload = () => {
     if (generatedHtml) {
-      const blob = new Blob([generatedHtml.full], { type: 'text/html' });
+      const blob = new Blob([generatedHtml[activeTab]], { type: activeTab === 'full' ? 'text/html' : 'text/plain' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'postman-button.html';
+      a.download = `postman-button-${activeTab}.html`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -87,44 +88,37 @@ export const ExportCode = memo(function ExportCode({ generatedHtml }: ExportCode
             <code>{generatedHtml[activeTab]}</code>
           </pre>
         </div>
-        
-        <button
-          onClick={() => handleCopy(generatedHtml[activeTab], activeTab)}
-          className={`group absolute top-4 right-4 p-3 rounded-xl transition-all duration-200 ease-in-out ${
-            copiedStates[activeTab]
-              ? 'bg-emerald-500 text-white shadow-lg scale-110'
-              : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'
-          }`}
-          title="Copy to clipboard"
-        >
-          <span className={`absolute -top-14 right-0 bg-slate-900 text-white px-3 py-2 rounded-lg text-sm shadow-xl transition-all duration-200 ease-in-out ${copiedStates[activeTab] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
-            Copied!
-          </span>
-          {copiedStates[activeTab] ? (
-            <Check className="w-5 h-5" />
-          ) : (
-            <Copy className="w-5 h-5" />
-          )}
-        </button>
       </div>
 
       <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
         <p className="text-slate-400 text-sm">
           {activeTab === 'inline' 
             ? 'Copy this code to embed directly in your webpage.'
-            : 'Complete HTML file ready for download'
+            : 'A complete HTML file ready to use.'
           }
         </p>
         
-        {activeTab === 'full' && (
+        <div className="flex gap-4">
+          <button
+            onClick={handleCopy}
+            className={`inline-flex items-center px-6 py-3 font-semibold rounded-xl transition-all shadow-lg hover:shadow-violet-500/25 ${
+              isCopied
+                ? 'bg-emerald-500 text-white'
+                : 'bg-gradient-to-r from-violet-500 to-purple-500 text-white hover:from-violet-600 hover:to-purple-600'
+            }`}
+          >
+            {isCopied ? <Check className="w-5 h-5 mr-2" /> : <Copy className="w-5 h-5 mr-2" />}
+            {isCopied ? 'Copied!' : 'Copy Code'}
+          </button>
+
           <button
             onClick={handleDownload}
-            className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-500 text-white font-semibold rounded-xl hover:from-violet-600 hover:to-purple-600 transition-all shadow-lg hover:shadow-violet-500/25"
+            className="inline-flex items-center px-6 py-3 bg-gray-700 text-white font-semibold rounded-xl hover:bg-gray-600 transition-all shadow-lg hover:shadow-gray-500/25"
           >
             <Download className="w-5 h-5 mr-2" />
-            Download HTML
+            Download
           </button>
-        )}
+        </div>
       </div>
     </div>
   );
