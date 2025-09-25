@@ -294,12 +294,6 @@ export const ButtonPreview = memo(function ButtonPreview({
     };
   }, [style, gradientFrom, gradientTo]);
 
-  const getIconSize = () => {
-    if (style.id === 'icon-heavy') return { width: '24', height: '24' };
-    if (style.id === 'retro-vintage') return { width: '20', height: '20' };
-    return { width: '16', height: '16' };
-  };
-
   const animationClass = isSelected && animations ? getCombinedAnimationClass(animations.hover, animations.entrance) : '';
   const animationCSS = isSelected && animations ? 
     [

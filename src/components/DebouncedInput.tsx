@@ -2,39 +2,37 @@
 
 import { useState, useEffect } from 'react';
 
-function debounce<T extends (...args: any[]) => void>(func: T, delay: number) {
-  let timeout: NodeJS.Timeout;
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), delay);
-  };
-}
-
-interface DebouncedInputProps {
+interface DebouncedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   value: string;
   onChange: (value: string) => void;
   debounce?: number;
-  [key: string]: any;
 }
 
 export const DebouncedInput = ({
-  value: parentValue,
+  value: initialValue,
   onChange,
-  debounceTimeout = 300,
+  debounce = 500,
   ...props
 }: DebouncedInputProps) => {
-  const [localValue, setLocalValue] = useState(parentValue);
-  const debouncedOnChange = useRef(debounce(onChange, debounceTimeout)).current;
+  const [value, setValue] = useState(initialValue);
 
   useEffect(() => {
-    setLocalValue(parentValue);
-  }, [parentValue]);
+    setValue(initialValue);
+  }, [initialValue]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setLocalValue(newValue);
-    debouncedOnChange(newValue);
-  };
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange(value);
+    }, debounce);
 
-  return <input {...props} value={localValue} onChange={handleChange} />;
+    return () => clearTimeout(timeout);
+  }, [value, onChange, debounce]);
+
+  return (
+    <input
+      {...props}
+      value={value}
+      onChange={e => setValue(e.target.value)}
+    />
+  );
 };
