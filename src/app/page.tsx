@@ -96,7 +96,7 @@ export default function Home() {
             <span className="text-sm font-medium text-violet-300">Professional Button Designer</span>
           </div>
           
-          <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent leading-tight">
+          <h1 className="text-6xl md:text-7xl font-black mb-6 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent leading-tight [text-shadow:0_4px_20px_rgba(138,43,226,0.3)]">
             Postman Button
             <br />
             <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
@@ -167,6 +167,7 @@ export default function Home() {
               animations={animations}
               textColor={textColor}
               selectedIcon={selectedIcon}
+              buttonText={buttonText}
             />
             
             {isValidConfig && <ExportCode generatedHtml={generatedHtml} />}

@@ -150,27 +150,23 @@ export const ConfigurationPanel = memo(function ConfigurationPanel({
             </div>
           </AccordionContent>
         </AccordionItem>
-
-        <AccordionItem value="item-4">
-          <AccordionTrigger>
-            <div className="flex items-center space-x-3">
-              <div className="p-3 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl">
-                <Clapperboard className="w-5 h-5 text-white" />
-              </div>
-              <h2 className="text-xl font-bold text-white">Animation Controls</h2>
-            </div>
-          </AccordionTrigger>
-          <AccordionContent>
-            <div className="pt-4">
-              <AnimationPicker
-                animations={animations}
-                onChange={setAnimations}
-              />
-            </div>
-          </AccordionContent>
-        </AccordionItem>
       </Accordion>
       
+      <div className="bg-slate-950 border border-slate-800 rounded-xl p-6 space-y-4">
+        <div className="flex items-center space-x-3">
+          <div className="p-3 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl">
+            <Clapperboard className="w-5 h-5 text-white" />
+          </div>
+          <h2 className="text-xl font-bold text-white">Animation Controls</h2>
+        </div>
+        <div className="pt-4">
+          <AnimationPicker
+            animations={animations}
+            onChange={setAnimations}
+          />
+        </div>
+      </div>
+
       {!isValidConfig && (
         <div className="bg-amber-900 bg-opacity-30 border border-amber-500 rounded-lg p-3 mt-4">
           <div className="flex items-center space-x-2">

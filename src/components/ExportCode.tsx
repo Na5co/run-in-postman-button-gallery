@@ -90,13 +90,16 @@ export const ExportCode = memo(function ExportCode({ generatedHtml }: ExportCode
         
         <button
           onClick={() => handleCopy(generatedHtml[activeTab], activeTab)}
-          className={`absolute top-4 right-4 p-3 rounded-xl transition-all ${
+          className={`group absolute top-4 right-4 p-3 rounded-xl transition-all duration-200 ease-in-out ${
             copiedStates[activeTab]
-              ? 'bg-emerald-500 text-white shadow-lg'
-              : 'bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-600'
+              ? 'bg-emerald-500 text-white shadow-lg scale-110'
+              : 'bg-slate-800 text-slate-300 hover:bg-slate-700 border border-slate-600'
           }`}
           title="Copy to clipboard"
         >
+          <span className={`absolute -top-14 right-0 bg-slate-900 text-white px-3 py-2 rounded-lg text-sm shadow-xl transition-all duration-200 ease-in-out ${copiedStates[activeTab] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}`}>
+            Copied!
+          </span>
           {copiedStates[activeTab] ? (
             <Check className="w-5 h-5" />
           ) : (
@@ -105,10 +108,10 @@ export const ExportCode = memo(function ExportCode({ generatedHtml }: ExportCode
         </button>
       </div>
 
-      <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-gray-400">
+      <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+        <p className="text-slate-400 text-sm">
           {activeTab === 'inline' 
-            ? 'Copy this code to embed directly in your webpage'
+            ? 'Copy this code to embed directly in your webpage.'
             : 'Complete HTML file ready for download'
           }
         </p>

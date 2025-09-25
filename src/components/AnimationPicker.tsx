@@ -1,21 +1,34 @@
 'use client';
 
 import { memo } from 'react';
-import { AnimationOption, ButtonAnimation } from '@/types/button';
-import { hoverAnimations, entranceAnimations } from '@/lib/animations';
-import { Play, MousePointer } from 'lucide-react';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { ButtonAnimation } from '@/types/button';
+import { hoverAnimations } from '@/lib/animations';
+import { cn } from '@/lib/utils';
 
 interface AnimationPickerProps {
   animations: ButtonAnimation;
   onChange: (animations: ButtonAnimation) => void;
 }
+
+interface AnimationButtonProps {
+  animation: { id: string; name: string };
+  selected: boolean;
+  onClick: (id: string) => void;
+}
+
+const AnimationButton = ({ animation, selected, onClick }: AnimationButtonProps) => (
+  <button
+    onClick={() => onClick(animation.id)}
+    className={cn(
+      'px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ease-in-out transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-blue-500',
+      selected
+        ? 'bg-blue-600 text-white shadow-lg'
+        : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+    )}
+  >
+    {animation.name}
+  </button>
+);
 
 export const AnimationPicker = memo(function AnimationPicker({ 
   animations, 
@@ -30,58 +43,22 @@ export const AnimationPicker = memo(function AnimationPicker({
     });
   };
 
-  const handleEntranceChange = (id: string) => {
-    const entrance = entranceAnimations.find(a => a.id === id);
-    onChange({
-      ...animations,
-      entrance: entrance && entrance.id !== 'none' ? entrance : null
-    });
-  };
-
   return (
-    <div className="space-y-4">
-      {/* Hover Animations */}
+    <div className="space-y-6">
       <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2">
+        <label className="block text-base font-semibold text-slate-300 mb-4">
           Hover Effect
         </label>
-        <Select onValueChange={handleHoverChange} value={animations.hover?.id || 'none'}>
-          <SelectTrigger>
-            <div className="flex items-center space-x-2">
-              <MousePointer className="w-4 h-4 text-blue-400" />
-              <SelectValue placeholder="Select hover effect" />
-            </div>
-          </SelectTrigger>
-          <SelectContent>
-            {hoverAnimations.map((animation) => (
-              <SelectItem key={animation.id} value={animation.id}>
-                {animation.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
-      {/* Entrance Animations */}
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2">
-          Entrance Effect
-        </label>
-        <Select onValueChange={handleEntranceChange} value={animations.entrance?.id || 'none'}>
-          <SelectTrigger>
-            <div className="flex items-center space-x-2">
-              <Play className="w-4 h-4 text-green-400" />
-              <SelectValue placeholder="Select entrance effect" />
-            </div>
-          </SelectTrigger>
-          <SelectContent>
-            {entranceAnimations.map((animation) => (
-              <SelectItem key={animation.id} value={animation.id}>
-                {animation.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <div className="flex flex-wrap gap-3">
+          {hoverAnimations.map((animation) => (
+            <AnimationButton
+              key={animation.id}
+              animation={animation}
+              selected={animations.hover?.id === animation.id || (animation.id === 'none' && !animations.hover)}
+              onClick={handleHoverChange}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

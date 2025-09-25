@@ -21,6 +21,7 @@ interface ButtonPreviewProps {
   isSelected?: boolean;
   animations?: ButtonAnimation;
   selectedIcon?: string | null;
+  buttonText?: string;
 }
 
 export const ButtonPreview = memo(function ButtonPreview({ 
@@ -30,6 +31,7 @@ export const ButtonPreview = memo(function ButtonPreview({
   isSelected = false,
   animations,
   selectedIcon,
+  buttonText = 'Run in Postman',
 }: ButtonPreviewProps) {
   const gradientFrom = customGradient?.from || style.gradientFrom;
   const gradientTo = customGradient?.to || style.gradientTo;
@@ -87,17 +89,6 @@ export const ButtonPreview = memo(function ButtonPreview({
       };
     }
     
-    if (style.id === 'retro-vintage') {
-      return {
-        ...baseStyles,
-        background: `linear-gradient(135deg, ${gradientFrom}, ${gradientTo})`,
-        textTransform: 'uppercase' as const,
-        letterSpacing: '1px',
-        boxShadow: `8px 8px 0 ${shadeColor(gradientFrom, -40)}`,
-        color: shadeColor(gradientFrom, -40)
-      };
-    }
-
     if (style.id === 'pixel-art') {
       const shadowColor = shadeColor(gradientTo, -40);
       return {
@@ -324,10 +315,10 @@ export const ButtonPreview = memo(function ButtonPreview({
         <style dangerouslySetInnerHTML={{ __html: animationCSS }} />
       )}
     <div 
-      className={`cursor-pointer p-6 rounded-2xl border-2 transition-colors duration-200 ${
+      className={`relative cursor-pointer p-6 rounded-2xl border-2 transition-all duration-300 ease-in-out transform hover:-translate-y-1 ${
         isSelected 
-          ? 'border-violet-500 bg-violet-900 shadow-lg' 
-          : 'border-gray-700 hover:border-gray-600 hover:shadow-md bg-gray-800'
+          ? 'border-violet-500 bg-violet-900/50 shadow-2xl scale-105' 
+          : 'border-gray-700 hover:border-gray-600 hover:shadow-lg bg-gray-800'
       }`}
       onClick={onClick}
     >
@@ -338,7 +329,7 @@ export const ButtonPreview = memo(function ButtonPreview({
             style={buttonStyles}
           >
             {selectedIcon && React.createElement(iconComponents[selectedIcon as keyof typeof iconComponents], { className: 'w-4 h-4' })}
-            {style.id === 'icon-heavy' ? 'Run' : style.id === 'minimalist-icon' ? '' : 'Run in Postman'}
+            {style.id === 'icon-heavy' ? 'Run' : style.id === 'minimalist-icon' ? '' : buttonText}
           </div>
         </div>
         
