@@ -27,7 +27,7 @@ export function generatePostmanButtonHtml({
   const forkUrl = `https://god.postman.co/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
   
   const getButtonStyles = () => {
-    let baseStyle = `
+    const baseStyle = `
                 border-radius: ${style.borderRadius};
                 padding: ${style.padding};
                 font-size: ${style.fontSize};
@@ -352,7 +352,7 @@ export function generateInlineButtonHtml({
   const forkUrl = `https://god.postman.co/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
   
   const getButtonStyles = () => {
-    let baseStyle = `
+    const baseStyle = `
         border-radius: ${style.borderRadius};
         padding: ${style.padding};
         font-size: ${style.fontSize};
@@ -618,19 +618,6 @@ export function generateInlineButtonHtml({
         animations.entrance && animations.entrance.id !== 'none' ? getAnimationCSS(animations.entrance, `.c-postman-button--${style.id}.${animations.entrance.cssClass}`) : '',
         animations.hover && animations.hover.id !== 'none' ? getAnimationCSS(animations.hover, `.c-postman-button--${style.id}.${animations.hover.cssClass}:hover`) : ''
     ].join('\n') : '';
-
-  const getHoverEffects = () => {
-    if (style.hoverEffect.includes('scale')) {
-      return `this.style.transform='scale(1.05)';`;
-    }
-    if (style.hoverEffect.includes('translate-y')) {
-      return `this.style.transform='translateY(-2px)';`;
-    }
-    if (style.hoverEffect.includes('rotate')) {
-      return `this.style.transform='rotate(1deg) scale(1.05)';`;
-    }
-    return `this.style.transform='scale(1.05)';`;
-  };
 
   return `<!-- Run in Postman Button - ${style.name} Style -->
 <style>

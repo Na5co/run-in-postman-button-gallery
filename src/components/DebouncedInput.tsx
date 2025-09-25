@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number) {
   let timeout: NodeJS.Timeout;
@@ -10,10 +10,11 @@ function debounce<T extends (...args: any[]) => void>(func: T, delay: number) {
   };
 }
 
-interface DebouncedInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+interface DebouncedInputProps {
   value: string;
   onChange: (value: string) => void;
-  debounceTimeout?: number;
+  debounce?: number;
+  [key: string]: any;
 }
 
 export const DebouncedInput = ({

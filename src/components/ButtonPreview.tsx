@@ -42,7 +42,7 @@ export const ButtonPreview = memo(function ButtonPreview({
       borderRadius: style.borderRadius,
       padding: style.padding,
       fontSize: style.fontSize,
-      fontWeight: style.fontWeight as any,
+      fontWeight: style.fontWeight,
       boxShadow: style.shadow,
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", sans-serif',
       transition: 'all 0.3s ease',
@@ -300,8 +300,6 @@ export const ButtonPreview = memo(function ButtonPreview({
     return { width: '16', height: '16' };
   };
 
-  const iconSize = getIconSize();
-  
   const animationClass = isSelected && animations ? getCombinedAnimationClass(animations.hover, animations.entrance) : '';
   const animationCSS = isSelected && animations ? 
     [
