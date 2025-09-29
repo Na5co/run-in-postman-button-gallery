@@ -201,7 +201,7 @@ export function generatePostmanButtonHtml({
   const gradientFrom = customGradient?.from || style.gradientFrom;
   const gradientTo = customGradient?.to || style.gradientTo;
   
-  const forkUrl = `https://god.postman.co/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
+  const forkUrl = `https://app.getpostman.com/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
   
   const getButtonText = () => {
     if (style.id === 'icon-heavy') return 'Run';
@@ -273,7 +273,7 @@ export function generateInlineButtonHtml({
   const gradientFrom = customGradient?.from || style.gradientFrom;
   const gradientTo = customGradient?.to || style.gradientTo;
   
-  const forkUrl = `https://god.postman.co/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
+  const forkUrl = `https://app.getpostman.com/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
 
   const getButtonText = () => {
     if (style.id === 'icon-heavy') return 'Run';

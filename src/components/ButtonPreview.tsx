@@ -62,10 +62,10 @@ export const ButtonPreview = memo(function ButtonPreview({
     }
     return cssParts.join('\n');
   }, [shouldAnimate, animations]);
-
+  
   const handleLivePreviewClick = () => {
     if (collectionId && workspaceId) {
-      const url = `https://god.postman.co/run-collection/${collectionId}?workspaceId=${workspaceId}`;
+      const url = `https://app.getpostman.com/run-collection/${collectionId}?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D${collectionId}%26entityType%3Dcollection%26workspaceId%3D${workspaceId}`;
       window.open(url, '_blank');
     }
   };
