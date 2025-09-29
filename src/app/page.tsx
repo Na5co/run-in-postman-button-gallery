@@ -178,6 +178,8 @@ export default function Home() {
                 textColor={textColor}
                 selectedIcon={selectedIcon}
                 buttonText={buttonText}
+                collectionId={collectionId}
+                workspaceId={workspaceId}
               />
             </AnimatedDiv>
             

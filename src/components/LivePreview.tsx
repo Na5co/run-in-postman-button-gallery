@@ -12,6 +12,8 @@ interface LivePreviewProps {
   textColor: string;
   selectedIcon: string | null;
   buttonText: string;
+  collectionId: string;
+  workspaceId: string;
 }
 
 export const LivePreview = memo(function LivePreview({
@@ -21,6 +23,8 @@ export const LivePreview = memo(function LivePreview({
   textColor,
   selectedIcon,
   buttonText,
+  collectionId,
+  workspaceId,
 }: LivePreviewProps) {
   return (
     <div className="bg-gray-900 border border-gray-800 rounded-2xl p-8 shadow-xl">
@@ -42,6 +46,8 @@ export const LivePreview = memo(function LivePreview({
           selectedIcon={selectedIcon}
           buttonText={buttonText}
           isLivePreview
+          collectionId={collectionId}
+          workspaceId={workspaceId}
         />
       </div>
     </div>

@@ -23,6 +23,8 @@ interface ButtonPreviewProps {
   selectedIcon?: string | null;
   buttonText?: string;
   isLivePreview?: boolean;
+  collectionId?: string;
+  workspaceId?: string;
 }
 
 export const ButtonPreview = memo(function ButtonPreview({ 
@@ -34,6 +36,8 @@ export const ButtonPreview = memo(function ButtonPreview({
   selectedIcon,
   buttonText = 'Run in Postman',
   isLivePreview = false,
+  collectionId,
+  workspaceId,
 }: ButtonPreviewProps) {
   const gradientFrom = customGradient?.from || style.gradientFrom;
   const gradientTo = customGradient?.to || style.gradientTo;
@@ -59,6 +63,13 @@ export const ButtonPreview = memo(function ButtonPreview({
     return cssParts.join('\n');
   }, [shouldAnimate, animations]);
 
+  const handleLivePreviewClick = () => {
+    if (collectionId && workspaceId) {
+      const url = `https://god.postman.co/run-collection/${collectionId}?workspaceId=${workspaceId}`;
+      window.open(url, '_blank');
+    }
+  };
+  
   const containerClasses = isLivePreview
     ? 'relative p-6 rounded-2xl'
     : `relative cursor-pointer p-6 rounded-2xl border-2 transition-all duration-300 ease-in-out transform hover:-translate-y-1 ${
@@ -74,12 +85,12 @@ export const ButtonPreview = memo(function ButtonPreview({
       )}
       <div
         className={containerClasses}
-        onClick={isLivePreview ? undefined : onClick}
+        onClick={isLivePreview ? handleLivePreviewClick : onClick}
       >
         <div className="flex flex-col items-center space-y-4">
           <div className="flex justify-center items-center min-h-[80px] w-full">
             <div
-              className={`inline-flex items-center gap-2 select-none cursor-pointer transition-all duration-300 ${animationClass}`}
+              className={`inline-flex items-center gap-2 select-none transition-all duration-300 ${isLivePreview ? 'cursor-pointer' : ''} ${animationClass}`}
               style={buttonStyles}
             >
               {selectedIcon && React.createElement(iconComponents[selectedIcon as keyof typeof iconComponents], { className: 'w-4 h-4' })}
